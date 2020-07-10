@@ -449,7 +449,10 @@ float* crop_H(float *H,int* h_height,int* h_width,int depth,int dh,int dw){
 }
 
 float* fhog(float* I,int height,int width,int channel,int *h,int *w,int *d,int binSize, int nOrients, float clip, bool crop){
-    float *M = new float[height*width], *O = new float[height*width];
+    
+    float *M = new float[height*width];
+    float *O = new float[height*width];
+
     gradMag(I,M,O, height, width, channel, true);
 
     *h = height/binSize;
@@ -462,7 +465,8 @@ float* fhog(float* I,int height,int width,int channel,int *h,int *w,int *d,int b
 
     fhog( M, O, H, height, width, binSize, nOrients, -1, clip );
 
-    delete M;delete O;
+    delete [] M;
+    delete [] O;
     if(!crop)
         return H;
     return crop_H(H,h,w,*d,height%binSize < binSize/2,width%binSize < binSize/2);
@@ -503,6 +507,8 @@ cv::Mat fhog(const cv::Mat& input, int binSize, int nOrients, float clip, bool c
     change_format(H,HH,d,w,h);
 
     cv::Mat fhog_feature(h,w,CV_32FC(32),H);
-    delete II;delete I;delete HH;
+    delete [] II;
+    delete [] I;
+    delete [] HH;
     return fhog_feature;
 }

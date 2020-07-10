@@ -687,7 +687,7 @@ void FDSSTTracker::dsstInit(const cv::Rect &roi, cv::Mat image)
 
   // Guassian peak for scales (after fft)
 
-  // ´¦Àí²åÖµÇ°µÄ³ß¶ÈÐòÁÐ£¬¼´ÐèÒªÌáÈ¡¶à³ß¶ÈÌØÕ÷µÄÒ»×éÖµ
+  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÇ°ï¿½Ä³ß¶ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½È¡ï¿½ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Öµ
   cv::Mat colScales =
 	  rangeToColVector<float>(-floor((n_scales - 1) / 2),
 	  ceil((n_scales - 1) / 2), n_scales);
@@ -714,7 +714,7 @@ void FDSSTTracker::dsstInit(const cv::Rect &roi, cv::Mat image)
   scaleFactors = pow<float, float>(scale_step, colScales);
   
 
-  // ´¦Àí²åÖµºóµÄ³ß¶ÈÐòÁÐ
+  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ä³ß¶ï¿½ï¿½ï¿½ï¿½ï¿½
   cv::Mat interp_colScales =
 	  rangeToColVector<float>(-floor((n_interp_scales - 1) / 2),
 	  ceil((n_interp_scales - 1) / 2), n_interp_scales);
@@ -767,7 +767,7 @@ void FDSSTTracker::train_scale(cv::Mat image, bool ini)
   // Get Sigma{FF} in the paper (delta B)
   cv::Mat new_sf_den;
   cv::mulSpectrums(xsf, xsf, new_sf_den, 0, true);
-  cv::reduce(FFTTools::real(new_sf_den), new_sf_den, 0, CV_REDUCE_SUM);
+  cv::reduce(FFTTools::real(new_sf_den), new_sf_den, 0, cv::REDUCE_SUM);
 
   if(ini)
   {

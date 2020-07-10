@@ -12,7 +12,7 @@
 #include "fdssttracker.hpp"
 
 
-#include <windows.h>
+// #include <windows.h>
 //#include <dirent.h>
 
 
@@ -62,7 +62,7 @@ int main(int argc, char* argv[]){
 	for (;;)
 	{
 		auto t_start = clock();
-		sprintf_s(name, "%06d", count);
+		sprintf(name, "%06d", count);
 		std::string imgFinalPath = imgPath + std::string(name) + ".jpg";
 		processImg = cv::imread(imgFinalPath, IMREAD_GRAYSCALE);
 
